@@ -68,3 +68,5 @@ function validatePassword(password) {
     password.length >= 8
   );
 }
+
+module.exports={signup:run};

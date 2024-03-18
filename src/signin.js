@@ -37,3 +37,5 @@ function loginUser(userInfo) {
   }
   return false;
 }
+
+module.exports={signin:run};
