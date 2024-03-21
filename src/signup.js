@@ -1,3 +1,4 @@
+const fcn = require("./functions.js");
 const prompt = require("prompt-sync")({ sigint: true });
 const fs = require("node:fs");
 
@@ -16,7 +17,7 @@ function getUserInfo() {
 
   while (true) {
     email = prompt("Please enter your email: ");
-    if (!validateEmail(email)) {
+    if (!fcn.validateEmail(email)) {
       console.log("error: The email is not in the correct format.");
       continue;
     }
@@ -25,7 +26,7 @@ function getUserInfo() {
 
   while (true) {
     password = prompt("Please enter your password: ");
-    if (!validatePassword(password)) {
+    if (!fcn.validatePassword(password)) {
       console.log("error: The password is not in the correct format.");
       continue;
     }
@@ -48,25 +49,3 @@ function appendUser(userInfo) {
     console.log("User successfully created");
   });
 }
-
-// VALIDATION
-
-function validateEmail(email) {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    );
-}
-
-function validatePassword(password) {
-  return (
-    /[A-Z]/.test(password) &&
-    /[a-z]/.test(password) &&
-    /[0-9]/.test(password) &&
-    /[^A-Za-z0-9]/.test(password) &&
-    password.length >= 8
-  );
-}
-
-module.exports={signup:run};

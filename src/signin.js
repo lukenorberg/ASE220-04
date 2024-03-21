@@ -1,14 +1,12 @@
+const fcn = require("./functions.js");
 const prompt = require("prompt-sync")({ sigint: true });
-const lineByLine = require("n-readlines");
-
-const CRED_FILE = "./data/credentials.csv";
 
 run();
 
 function run() {
   while (true) {
     const userInfo = getUserInfo();
-    if (loginUser(userInfo)) {
+    if (fcn.loginUser(userInfo)) {
       break;
     }
     console.log("Incorrect login info. Please try again or sign up.");
@@ -24,18 +22,3 @@ function getUserInfo() {
     password: password,
   };
 }
-
-function loginUser(userInfo) {
-  const liner = new lineByLine(CRED_FILE);
-  let line;
-
-  while ((line = liner.next())) {
-    lineInfo = line.toString("ascii").split(",");
-    if (userInfo.email === lineInfo[0] && userInfo.password === lineInfo[1]) {
-      return true;
-    }
-  }
-  return false;
-}
-
-module.exports={signin:run};
