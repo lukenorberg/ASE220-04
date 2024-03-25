@@ -27,7 +27,7 @@ module.exports = {
     let line;
 
     while ((line = liner.next())) {
-      lineInfo = line.toString("ascii").trim().split(",");
+      lineInfo = line.toString("ascii").split(",");
       if (userInfo.email === lineInfo[0] && userInfo.password === lineInfo[1]) {
         return true;
       }
